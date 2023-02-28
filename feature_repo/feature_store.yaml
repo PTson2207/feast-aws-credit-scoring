@@ -1,3 +1,4 @@
+project: my_feast_project
 provider: aws
 online_store:
     type: dynamodb

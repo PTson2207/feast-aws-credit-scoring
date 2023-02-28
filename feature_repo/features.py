@@ -1,13 +1,14 @@
 from datetime import timedelta
-from feast import Entity, Feature, FeatureView, RedshiftSource, ValueType
 
-
+from feast import (Entity, Feature, FeatureView, RedshiftSource,
+                   ValueType)
 
 zipcode = Entity(name="zipcode", value_type=ValueType.INT64)
 
 zipcode_source = RedshiftSource(
+    name="zipcode_features",
     query="SELECT * FROM spectrum.zipcode_features",
-    event_timestamp_column="event_timestamp",
+    timestamp_field="event_timestamp",
     created_timestamp_column="created_timestamp",
 )
 
@@ -21,9 +22,10 @@ zipcode_features = FeatureView(
         Feature(name="location_type", dtype=ValueType.STRING),
         Feature(name="tax_returns_filed", dtype=ValueType.INT64),
         Feature(name="population", dtype=ValueType.INT64),
-        Feature(name="total_wages", dtype=ValueType.INT64)
+        Feature(name="total_wages", dtype=ValueType.INT64),
     ],
     batch_source=zipcode_source,
+    source=zipcode_source,
 )
 
 dob_ssn = Entity(
@@ -33,9 +35,10 @@ dob_ssn = Entity(
 )
 
 credit_history_source = RedshiftSource(
+    name="credit_history",
     query="SELECT * FROM spectrum.credit_history",
-    event_timestamp_column="event_timestamp",
-    created_timestamp_column="create_timestamp",
+    timestamp_field="event_timestamp",
+    created_timestamp_column="created_timestamp",
 )
 
 credit_history = FeatureView(
@@ -54,4 +57,5 @@ credit_history = FeatureView(
         Feature(name="bankruptcies", dtype=ValueType.INT64),
     ],
     batch_source=credit_history_source,
+    source=credit_history_source,
 )
