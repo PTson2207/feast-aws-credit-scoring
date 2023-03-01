@@ -11,3 +11,8 @@ pandas>=1.0.0
 # redshift_spectrum_arn = "arn:aws:iam::299467553798:role/s3_spectrum_role"
 # zipcode_features_table = "zipcode_features"
 
+# credit_history_table = "credit_history"
+# redshift_cluster_identifier = "my-feast-project-aws-redshift-cluster-v2"
+# redshift_spectrum_arn = "arn:aws:iam::299467553798:role/s3_spectrum_role"
+# zipcode_features_table = "zipcode_features"
+

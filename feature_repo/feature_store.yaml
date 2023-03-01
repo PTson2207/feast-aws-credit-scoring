@@ -2,12 +2,12 @@ project: my_feast_project
 provider: aws
 online_store:
     type: dynamodb
-    region: ${TF_VAR_region}
+    region: ap-northeast-1
 offline_store:
     type: redshift
-    cluster_id: ${tf_redshift_cluster_identifier}
-    region: ${TF_VAR_region}
+    cluster_id: my-feast-project-aws-redshift-cluster-v2
+    region: ap-northeast-1
     user: admin
     database: dev_v2
-    s3_staging_location: s3://${TF_VAR_project_name}-bucket
-    iam_role: ${tf_redshift_spectrum_arn}
+    s3_staging_location: s3://my-feast-project-aws-bucket-ptson
+    iam_role: arn:aws:iam::299467553798:role/s3_spectrum_role

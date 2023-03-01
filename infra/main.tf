@@ -80,7 +80,7 @@ resource "aws_iam_role_policy_attachment" "s3-policy-attachment" {
 }
 
 resource "aws_redshift_cluster" "feast_redshift_cluster" {
-  cluster_identifier = "${var.project_name}-redshift-cluster" #need changes name
+  cluster_identifier = "${var.project_name}-redshift-cluster-v2" #need changes name
   iam_roles = [
     data.aws_iam_role.AWSServiceRoleForRedshift.arn,
     aws_iam_role.s3_spectrum_role.arn
