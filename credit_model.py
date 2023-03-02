@@ -55,13 +55,7 @@ class CreditScoringModel:
         #set up feature store
         self.fs = feast.FeatureStore(repo_path="feature_repo")
 
-    def train(self, loans):
-        train_X, train_Y = self._get_training_features(loans)
-
-        self.classifier.fit(train_X[sorted(train_X)], train_Y)
-        joblib.dump(self.classifier, self.model_filename)
-
-    def _get_training_feature(self, loans):
+    def _get_training_features(self, loans):
         """get training feature from feast
 
         Args:
@@ -90,6 +84,13 @@ class CreditScoringModel:
         train_Y = training_df.loc[:, self.target]
 
         return train_X, train_Y
+
+    def train(self, loans):
+        train_X, train_Y = self._get_training_features(loans)
+
+        self.classifier.fit(train_X[sorted(train_X)], train_Y)
+        joblib.dump(self.classifier, self.model_filename)
+
     
     def _fit_ordinal_encoder(self, requests):
         self.encoder.fit(requests[self.categorical_features])
